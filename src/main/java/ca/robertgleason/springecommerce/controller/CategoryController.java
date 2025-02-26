@@ -13,11 +13,12 @@ import java.util.List;
 
 @RestController
 public class CategoryController {
+
+    private CategoryService categoryService;
+
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
-
-    private CategoryService categoryService;
 
 
     @GetMapping("/api/public/categories")
