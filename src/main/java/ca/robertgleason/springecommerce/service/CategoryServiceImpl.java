@@ -28,42 +28,25 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
-//        category.setCategoryId(nextId++);
         categoryRepository.save(category);
     }
 
     @Override
     public String deleteCategory(Long categoryId) {
-        List<Category> categories = categoryRepository.findAll();
-        Category category = categories.stream()
-                .filter(c -> c.getCategoryId().equals(categoryId))
-                .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
-
-        if (category == null) {
-            return "Category not found";
-        }
-
-
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
         categoryRepository.deleteById(categoryId);
+        return category.getCategoryName() + " deleted successfully";
 
-        return "Category with category Id: " + categoryId + " deleted successfully";
     }
 
     @Override
     public String updateCategory(Long categoryId, Category category) {
-        Category categoryToUpdate = categoryRepository.findAll().stream()
-                .filter(c -> c.getCategoryId().equals(categoryId))
-                .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
+        categoryRepository.findById(categoryId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
+        Category savedCategory;
 
-        if (categoryToUpdate == null) {
-            return "Category not found";
-        }
 
-        categoryToUpdate.setCategoryName(category.getCategoryName());
-        categoryRepository.save(categoryToUpdate);
-
-        return "Category with category Id: " + categoryId + " updated successfully";
+        category.setCategoryId(categoryId);
+        savedCategory = categoryRepository.save(category);
+        return savedCategory.getCategoryName() + " updated successfully";
     }
 }
