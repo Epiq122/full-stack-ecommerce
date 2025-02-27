@@ -2,6 +2,7 @@ package ca.robertgleason.springecommerce.controller;
 
 import ca.robertgleason.springecommerce.model.Category;
 import ca.robertgleason.springecommerce.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,9 @@ public class CategoryController {
     }
 
 
-    //    @PostMapping("/api/public/categories")
-    @RequestMapping(value = "/public/categories", method = RequestMethod.POST)
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
+    @PostMapping("/api/public/categories")
+//    @RequestMapping(value = "/public/categories", method = RequestMethod.POST)
+    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<>("Category created successfully", HttpStatus.CREATED);
     }
