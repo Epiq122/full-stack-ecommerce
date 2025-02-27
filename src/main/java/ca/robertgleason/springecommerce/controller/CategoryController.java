@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
 
-    @PostMapping("/api/public/categories")
+    @PostMapping("/public/categories")
 //    @RequestMapping(value = "/public/categories", method = RequestMethod.POST)
     public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
         categoryService.createCategory(category);
