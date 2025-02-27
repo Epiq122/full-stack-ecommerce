@@ -1,15 +1,13 @@
 package ca.robertgleason.springecommerce.service;
 
 
+import ca.robertgleason.springecommerce.exceptions.ResourceNotFoundException;
 import ca.robertgleason.springecommerce.model.Category;
 import ca.robertgleason.springecommerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -33,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String deleteCategory(Long categoryId) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
         categoryRepository.deleteById(categoryId);
         return category.getCategoryName() + " deleted successfully";
 
@@ -41,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String updateCategory(Long categoryId, Category category) {
-        categoryRepository.findById(categoryId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Resource Not Found"));
+        categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
         Category savedCategory;
 
 
