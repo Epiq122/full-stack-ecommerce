@@ -4,6 +4,7 @@ package ca.robertgleason.springecommerce.service;
 import ca.robertgleason.springecommerce.exceptions.APIException;
 import ca.robertgleason.springecommerce.exceptions.ResourceNotFoundException;
 import ca.robertgleason.springecommerce.model.Category;
+import ca.robertgleason.springecommerce.payload.CategoryResponse;
 import ca.robertgleason.springecommerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public List<Category> getAllCategories() {
+    public List<CategoryResponse> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
         if (categories.isEmpty()) {
             throw new APIException("No categories found");
