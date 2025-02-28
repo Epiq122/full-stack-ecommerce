@@ -1,6 +1,7 @@
 package ca.robertgleason.springecommerce.controller;
 
 import ca.robertgleason.springecommerce.model.Category;
+import ca.robertgleason.springecommerce.payload.CategoryDTO;
 import ca.robertgleason.springecommerce.payload.CategoryResponse;
 import ca.robertgleason.springecommerce.service.CategoryService;
 import jakarta.validation.Valid;
@@ -22,15 +23,15 @@ public class CategoryController {
 
     @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories() {
-        CategoryResponse categories = (CategoryResponse) categoryService.getAllCategories();
+        CategoryResponse categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
 
     @PostMapping("/public/categories")
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) {
-        categoryService.createCategory(category);
-        return new ResponseEntity<>("Category created successfully", HttpStatus.CREATED);
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+        CategoryDTO savedCategory = categoryService.createCategory(categoryDTO);
+        return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
 
 

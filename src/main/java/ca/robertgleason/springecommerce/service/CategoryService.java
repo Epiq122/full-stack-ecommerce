@@ -1,13 +1,14 @@
 package ca.robertgleason.springecommerce.service;
 
 import ca.robertgleason.springecommerce.model.Category;
+import ca.robertgleason.springecommerce.payload.CategoryDTO;
 import ca.robertgleason.springecommerce.payload.CategoryResponse;
 
 
 public interface CategoryService {
     CategoryResponse getAllCategories();
 
-    void createCategory(Category category);
+    CategoryDTO createCategory(CategoryDTO categoryDto);
 
     String deleteCategory(Long categoryId);
 
