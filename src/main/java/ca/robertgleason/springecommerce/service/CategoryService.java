@@ -3,11 +3,9 @@ package ca.robertgleason.springecommerce.service;
 import ca.robertgleason.springecommerce.model.Category;
 import ca.robertgleason.springecommerce.payload.CategoryResponse;
 
-import java.util.List;
-
 
 public interface CategoryService {
-    List<CategoryResponse> getAllCategories();
+    CategoryResponse getAllCategories();
 
     void createCategory(Category category);
 
