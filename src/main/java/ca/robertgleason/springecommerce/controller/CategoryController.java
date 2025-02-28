@@ -1,6 +1,5 @@
 package ca.robertgleason.springecommerce.controller;
 
-import ca.robertgleason.springecommerce.model.Category;
 import ca.robertgleason.springecommerce.payload.CategoryDTO;
 import ca.robertgleason.springecommerce.payload.CategoryResponse;
 import ca.robertgleason.springecommerce.service.CategoryService;
@@ -36,15 +35,15 @@ public class CategoryController {
 
 
     @DeleteMapping("/admin/categories/{categoryId}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
-        String status = categoryService.deleteCategory(categoryId);
-        return new ResponseEntity<>(status, HttpStatus.OK);
+    public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable CategoryDTO categoryId) {
+        CategoryDTO deletedCategory = categoryService.deleteCategory(categoryId.getCategoryId());
+        return new ResponseEntity<>(deletedCategory, HttpStatus.OK);
     }
 
 
     @PutMapping("/admin/categories/{categoryId}")
-    public ResponseEntity<String> updateCategory(@Valid @PathVariable Long categoryId, @RequestBody Category category) {
-        String status = categoryService.updateCategory(categoryId, category);
-        return new ResponseEntity<>(status, HttpStatus.OK);
+    public ResponseEntity<CategoryDTO> updateCategory(@Valid @PathVariable Long categoryId, @RequestBody CategoryDTO categoryDTO) {
+        CategoryDTO savedCategoryDTO = categoryService.updateCategory(categoryDTO, categoryId);
+        return new ResponseEntity<>(savedCategoryDTO, HttpStatus.OK);
     }
 }
