@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .toList();
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent(categoryDTOS);
-        return categoryResponse; // ✅ Correct return type
+        return categoryResponse;
     }
 
     @Override
